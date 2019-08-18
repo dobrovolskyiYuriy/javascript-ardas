@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "To Do",
+    "color": "#d02653"
+  },
+  {
+    "id": 2,
+    "title": "In Progress",
+    "color": "#f59e3b"
+  },
+  {
+    "id": 3,
+    "title": "Done",
+    "color": "#10dd6d"
+  }
+]

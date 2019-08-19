@@ -7,37 +7,22 @@ import Greetings from './Greetings';
 class App extends React.Component {
   state = {
     isSubmit: false,
-    payload: {
-      name: '',
-      birthday: ''
-    }
+    name: '',
+    birthday: ''
   };
 
   handleChange = (event) => {
-    const { target } = event;
-    this.setState(state => {
-      const newState = { ...state };
-      newState.payload[target.id] = target.value;
-      return newState;
-    });
+    const { id, value } = event.target;
+    this.setState({ [id]: value });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState(state => ({
-      ...state,
-      isSubmit: !state.isSubmit 
-    }));
+    this.setState(state => ({ isSubmit: !state.isSubmit }));
   }
 
   render() {
-    const {
-      payload: {
-        name,
-        birthday
-      },
-      isSubmit
-    } = this.state;
+    const { name, birthday, isSubmit } = this.state;
 
     return (
       <div className="App">

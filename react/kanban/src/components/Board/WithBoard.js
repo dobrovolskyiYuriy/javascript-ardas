@@ -8,16 +8,21 @@ import Error from '../Error';
 export default WrappedComponent =>
   class WithBoard extends React.Component {
     static propTypes = {
-      columns: PropTypes.object.isRequired,
-      fetchColumns: PropTypes.func.isRequired
+      board: PropTypes.object.isRequired,
+      fetchBoard: PropTypes.func.isRequired
     };
 
     componentDidMount() {
-      this.props.fetchColumns();
+      this.props.fetchBoard();
+    }
+
+    getCardsForColumn(columnId) {
+      return this.props.board.data.cards
+        .filter(card => card.columnId === columnId);
     }
 
     render() {
-      const { data, loading, error } = this.props.columns;
+      const { data, loading, error } = this.props.board;
       let render;
 
       if (loading) {
@@ -25,8 +30,8 @@ export default WrappedComponent =>
       } else if (error) {
         render = <Error error={error} />
       } else {
-        render = data.map(column =>
-          <Column key={column.id} {...column} />);
+        render = data.columns.map(({ id, ...props }) =>
+          <Column key={id} cards={this.getCardsForColumn(id)} {...props} />);
       }
 
       return <WrappedComponent render={render} />

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import column from './column';
+import board from './board';
 
 export default combineReducers({
-  column
+  board
 });

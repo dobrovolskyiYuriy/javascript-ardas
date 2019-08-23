@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  min-height: 100px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.card-remove {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.card-title {
+  width: 80%;
+  border-radius: 5px;
+  margin-right: 2px;
+  padding: 5px;
+  word-wrap: break-word;
+  font-weight: bold;
+  box-shadow: 1.5px 1.5px 0 0 rgba(0, 0, 0, 0.2);
+}

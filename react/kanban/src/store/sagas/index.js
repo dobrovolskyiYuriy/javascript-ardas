@@ -1,14 +1,14 @@
 import createSagaMiddleware from 'redux-saga';
 import { fork, all } from 'redux-saga/effects';
 
-import column from './column';
+import board from './board';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export default sagaMiddleware;
 
 function* root() {
-  const watchers = [column].flat();
+  const watchers = [board].flat();
   yield all(watchers.map(fork));
 }
 

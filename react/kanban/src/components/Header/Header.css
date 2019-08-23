@@ -1,0 +1,10 @@
+.header {
+  padding: 10px 0;
+}
+
+.header-logo {
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}

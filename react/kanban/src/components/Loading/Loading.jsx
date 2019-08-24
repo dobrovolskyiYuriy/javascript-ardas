@@ -1,7 +1,35 @@
 import React from 'react';
 
-function Loading() {
-  return <div className='loading'>Loading...</div>
+const loading = [
+  ' ...',
+  '. ..',
+  '.. .',
+  '....'
+];
+
+class Loading extends React.Component {
+  state = {
+    loading: '....'
+  };
+
+  componentDidMount() {
+    let i = 0;
+    this.intervalId = setInterval(() => {
+      if (i === loading.length) {
+        i = 0;
+      }
+      this.setState({ loading: loading[i] });
+      i++;
+    }, 300);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
+  render() {
+    return <div className='loading'>Loading{this.state.loading}</div>
+  }
 }
 
 export default Loading;

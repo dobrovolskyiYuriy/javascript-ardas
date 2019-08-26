@@ -1,4 +1,4 @@
-import { successAction, failedAction, GET_BOARD } from '../types';
+import { successAction, failedAction, GET_BOARD, DELETE_CARD, ADD_CARD } from '../types';
 
 const initialState = {
   data: {
@@ -30,6 +30,28 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+        loading: false
+      };
+    }
+
+    case (successAction(DELETE_CARD)): {
+      return {
+        data: {
+          ...state.data,
+          cards: action.payload
+        },
+        error: null,
+        loading: false
+      };
+    }
+
+    case (successAction(ADD_CARD)): {
+      return {
+        data: {
+          ...state.data,
+          cards: action.payload
+        },
+        error: null,
         loading: false
       };
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Board({ render }) {
+  console.log('render');
   return (
     <div className='board'>
       {render}

@@ -31,7 +31,7 @@ export default WrappedComponent =>
         render = <Error error={error} />
       } else {
         render = data.columns.map(({ id, ...props }) =>
-          <Column key={id} cards={this.getCardsForColumn(id)} {...props} />);
+          <Column key={id} columnId={id} cards={this.getCardsForColumn(id)} {...props} />);
       }
 
       return <WrappedComponent render={render} />

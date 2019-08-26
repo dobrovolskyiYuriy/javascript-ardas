@@ -75,7 +75,7 @@ app.post("/api/card", function(req, res) {
 
   saveCards(cards);
 
-  res.type("application/json").send(JSON.stringify(card, null, 2));
+  res.type("application/json").send(JSON.stringify(cards, null, 2));
 });
 
 app.put("/api/card/:id", function(req, res) {
@@ -132,7 +132,7 @@ app.delete("/api/card/:id", function(req, res) {
   } else {
     cards.splice(index, 1);
     saveCards(cards);
-    res.send();
+    res.type("application/json").send(JSON.stringify(cards, null, 2));
   }
 });
 

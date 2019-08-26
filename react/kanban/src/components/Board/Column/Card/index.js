@@ -1,2 +1,5 @@
 import './Card.css';
-export { default } from './Card';
+import Card from './Card';
+import CardContainer from './CardContainer';
+
+export default CardContainer(Card);

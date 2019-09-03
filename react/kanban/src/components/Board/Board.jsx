@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Board({ render }) {
-  console.log('render');
+function Board({ children }) {
   return (
     <div className='board'>
-      {render}
+      {children}
     </div>
   );
 }
 
 Board.propTypes = {
-  render: PropTypes.oneOfType([
+  children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element)
   ]).isRequired

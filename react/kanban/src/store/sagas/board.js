@@ -1,15 +1,15 @@
-import { takeLatest, call } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 import { GET_BOARD } from '../types';
-import { getBoard } from '../../services/api';
-import makeAsyncRequest from './makeAsyncRequest';
+import { getColumns } from '../actions/column';
+import { getCards } from '../actions/card';
 
-function* fetchBoard() {
-  const action = () => call(getBoard);
-  yield makeAsyncRequest(action, GET_BOARD);
+function* actionGetBoard() {
+  yield put(getColumns());
+  yield put(getCards());
 }
 
-function* watchGetBoard() {
-  yield takeLatest(GET_BOARD, fetchBoard);
+function* watcherGetBoard() {
+  yield takeLatest(GET_BOARD, actionGetBoard);
 }
 
-export default [watchGetBoard];
+export default [watcherGetBoard];

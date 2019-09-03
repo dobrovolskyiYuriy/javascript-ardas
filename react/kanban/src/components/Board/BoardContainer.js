@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { getSelectedBoard } from '../../store/selectors/board';
-import { fetchBoard } from '../../store/actions/board';
+import { getSelectedColumns } from '../../store/selectors/column';
+import { getBoard } from '../../store/actions/board';
 
 function mapStateToProps(state) {
   return {
-    board: getSelectedBoard(state)
+    columns: getSelectedColumns(state)
   };
 }
 
-export default connect(mapStateToProps, { fetchBoard })
+export default connect(mapStateToProps, { getBoard });

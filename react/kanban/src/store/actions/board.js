@@ -1,6 +1,6 @@
 import { GET_BOARD } from '../types';
 
-export function fetchBoard() {
+export function getBoard() {
   return {
     type: GET_BOARD
   };

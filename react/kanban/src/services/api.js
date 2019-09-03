@@ -1,38 +1,38 @@
 import axios from 'axios';
 
-const api = 'http://localhost:8089/api';
+const kanban = axios.create({
+  baseURL: 'http://localhost:8089/api/'
+});
 
-export function addCard({ title, columnId }) {
-  return axios({
+export function updateCard(cardId, updatedCardProps) {
+  return kanban({
+    method: 'patch',
+    url: `card/${cardId}`,
+    data: updatedCardProps
+  })
+    .then(res => res.data);
+}
+
+export function addCard(newCard) {
+  return kanban({
     method: 'post',
-    url: `${api}/card`,
-    data: {
-        title,
-        columnId
-    }
+    url: `card`,
+    data: newCard
   })
     .then(res => res.data);
 }
 
 export function deleteCard(cardId) {
-  return axios.delete(`${api}/card/${cardId}`)
+  return kanban.delete(`card/${cardId}`)
     .then(res => res.data);
 }
 
-export function getBoard() {
-  return getColumns()
-    .then(columns => { 
-      return getCards()
-        .then(cards => ({ columns, cards }));
-     });
-}
-
 export function getColumns() {
-  return axios.get(`${api}/column`)
+  return kanban.get(`column`)
     .then(res => res.data);
 }
 
 export function getCards() {
-  return axios.get(`${api}/card`)
+  return kanban.get(`card`)
     .then(res => res.data);
 }

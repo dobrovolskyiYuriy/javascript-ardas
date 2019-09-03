@@ -1,28 +1,43 @@
 import { takeLatest, call } from 'redux-saga/effects';
-import { DELETE_CARD, ADD_CARD } from '../types';
+import { GET_CARDS, ADD_CARD, DELETE_CARD, UPDATE_CARD } from '../types';
+import { getCards, addCard, deleteCard, updateCard } from '../../services/api';
 import makeAsyncRequest from './makeAsyncRequest';
-import { deleteCard, addCard } from '../../services/api';
 
-function* actionDeleteCard(action) {
-  yield makeAsyncRequest(
-    () => call(deleteCard, action.payload),
-    DELETE_CARD
-  );
+function* actionGetCards() {
+  const fetchCards = () => call(getCards);
+  yield makeAsyncRequest(fetchCards, GET_CARDS);
 }
 
 function* actionAddCard(action) {
-  yield makeAsyncRequest(
-    () => call(addCard, action.payload),
-    ADD_CARD
-  );
+  const addNewCard = () => call(addCard, action.payload);
+  yield makeAsyncRequest(addNewCard, ADD_CARD);
 }
 
-function* watcherDeleteCard() {
-  yield takeLatest(DELETE_CARD, actionDeleteCard);
+function* actionDeleteCard(action) {
+  const cardDelete = () => call(deleteCard, action.payload);
+  yield makeAsyncRequest(cardDelete, DELETE_CARD);
+}
+
+function* actionUpdateCard(action) {
+  const { cardId, updatedCardProps } = action.payload;
+  const cardUpdate = () => call(updateCard, cardId, updatedCardProps);
+  yield makeAsyncRequest(cardUpdate, UPDATE_CARD);
+}
+
+function* watcherGetCards() {
+  yield takeLatest(GET_CARDS, actionGetCards);
 }
 
 function* watcherAddCard() {
   yield takeLatest(ADD_CARD, actionAddCard);
 }
 
-export default [watcherDeleteCard, watcherAddCard];
+function* watcherDeleteCard() {
+  yield takeLatest(DELETE_CARD, actionDeleteCard);
+}
+
+function* watcherUpdateCard() {
+  yield takeLatest(UPDATE_CARD, actionUpdateCard);
+}
+
+export default [watcherGetCards, watcherAddCard, watcherDeleteCard, watcherUpdateCard];

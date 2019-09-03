@@ -114,7 +114,7 @@ app.patch("/api/card/:id", function(req, res) {
     cards[index] = card;
     saveCards(cards);
 
-    res.type("application/json").send(JSON.stringify(card, null, 2));
+    res.type("application/json").send(JSON.stringify(cards, null, 2));
   }
 });
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Card from './Card';
+import ColumnSectionCards from './ColumnSectionCards';
 
-function Column(props) {
-  const { cards, title, color, onAddCard } = props;
-
+function Column({ id, title, color, onAddCard }) {
   return (
     <div className='column' style={{background: color}}>
       <div className='column-header'>
@@ -17,16 +15,13 @@ function Column(props) {
           onClick={onAddCard}
         />
       </div>
-      <div className='column-cards'>
-        {cards.map(({ id, title }) =>
-          <Card key={id} id={id} title={title} />)}
-      </div>
+      <ColumnSectionCards columnId={id} />
     </div>
   );
 }
 
 Column.propTypes = {
-  cards: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   onAddCard: PropTypes.func.isRequired

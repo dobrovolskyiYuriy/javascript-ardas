@@ -28,7 +28,8 @@ class Loading extends React.Component {
   }
 
   render() {
-    return <div className='loading'>Loading{this.state.loading}</div>
+    const { className } = this.props;
+    return <div className={(className || '') + ' loading'}>Loading{this.state.loading}</div>
   }
 }
 

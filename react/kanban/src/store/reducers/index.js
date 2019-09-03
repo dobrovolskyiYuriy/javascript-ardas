@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
-import board from './board';
+
+import column from './column';
+import card from './card';
+import dragAndDrop from './dragAndDrop'
 
 export default combineReducers({
-  board
+  column,
+  card,
+  dragAndDrop
 });

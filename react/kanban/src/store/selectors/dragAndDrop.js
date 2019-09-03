@@ -1,0 +1,1 @@
+export const getSelectedDragAndDrop = state => state.dragAndDrop;

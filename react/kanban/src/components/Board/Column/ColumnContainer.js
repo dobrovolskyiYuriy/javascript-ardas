@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
 import { addCard } from '../../../store/actions/card';
 
-export default connect(null, { addCard });
+import Column from './Column';
+
+export default connect(null, { addCard })(Column);

@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function Card({ id, title, deleteCard, onDragStart, ...props }) {
+import CardMain from './CardMainContainer';
+import CardEdit from './CardEditContainer';
+
+function Card({ card, ...props }) {
+  const { id, title } = card;
+
+  const [onEdit, setOnEdit] = useState(false);
+
+  const handleEdit = () =>
+    setOnEdit(!onEdit);
+
   return (
-    <div className='card' onDragStart={() => onDragStart(id)} {...props}>
-      <p className='card-title'>{title}</p>
-      <img
-        className='card-remove'
-        alt='card-remove'
-        src='img/removeCard.png'
-        onClick={() => deleteCard(id)}
-      />
+    <div className='card' {...props}>
+      {onEdit
+        ? <CardEdit card={{ id, title }} onEdit={handleEdit} />
+        : <CardMain card={{ id, title }} onEdit={handleEdit} />}
     </div>
   );
 }
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  deleteCard: PropTypes.func.isRequired,
-  onDragStart: PropTypes.func
+  card: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    columnId: PropTypes.number.isRequired
+  }).isRequired
 };
 
 export default Card;

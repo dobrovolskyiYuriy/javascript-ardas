@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 import ColumnSectionCards from './ColumnSectionCards';
 
-function Column({ id, title, color, onAddCard }) {
+function Column({ column, addCard }) {
+  const { id, title, color } = column;
+  
+  const handleAddCard = () => {
+    const title = prompt('Card title:', '');
+    title && addCard({ title, columnId: id });
+  };
+
   return (
     <div className='column' style={{background: color}}>
       <div className='column-header'>
@@ -12,7 +19,8 @@ function Column({ id, title, color, onAddCard }) {
           className='column-header-add-card'
           src='img/addCard.png'
           alt='add card'
-          onClick={onAddCard}
+          draggable={false}
+          onClick={handleAddCard}
         />
       </div>
       <ColumnSectionCards columnId={id} />
@@ -21,10 +29,12 @@ function Column({ id, title, color, onAddCard }) {
 }
 
 Column.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  onAddCard: PropTypes.func.isRequired
+  column: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired
+  }).isRequired,
+  addCard: PropTypes.func.isRequired
 };
 
 export default Column;

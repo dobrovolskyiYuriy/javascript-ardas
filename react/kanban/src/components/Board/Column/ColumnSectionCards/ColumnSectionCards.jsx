@@ -1,20 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ColumnSectionCards({ children, columnId, drop, ...props }) {
-  return <div
-    className='column-section-cards'
-    onDrop={() => drop(columnId)}
-    {...props}>{children}</div>;
+import Card from './Card';
+import Error from '../../../Error';
+import Loading from '../../../Loading';
+
+function ColumnSectionCards({ cards, columnId, ...props }) {
+  const { data, error, loading } = cards;
+
+  let render;
+  if (loading) {
+    render = <Loading className='column-section-cards-loading' />;
+  } else if (error) {
+    render = <Error error={error} />
+  } else {
+    render = data.map(card =>
+      <Card key={card.id} card={card} />);
+  }
+
+  return (
+    <div className='column-section-cards' {...props}>
+      {render}
+    </div>
+  );
 }
 
 ColumnSectionCards.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]).isRequired,
-  columnId: PropTypes.number,
-  drop: PropTypes.func
+  cards: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        columnId: PropTypes.number.isRequired
+      }).isRequired
+    ).isRequired,
+    error: PropTypes.object,
+    loading: PropTypes.bool.isRequired
+  }).isRequired,
+  columnId: PropTypes.number.isRequired
 };
 
 export default ColumnSectionCards;

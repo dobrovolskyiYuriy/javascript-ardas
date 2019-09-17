@@ -1,0 +1,9 @@
+.column-section-cards {
+  min-height: 120px;
+  padding: 15px;
+  border-radius: 2px;
+}
+
+.column-section-cards-loading {
+  font-size: 25px !important;
+}

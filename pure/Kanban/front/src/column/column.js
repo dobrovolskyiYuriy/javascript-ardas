@@ -10,9 +10,9 @@ import { isColumn, isHTMLElement } from '../checkType';
 import { typeDecorator } from '../decorators';
 
 function getColumns() {
-    return axios.get('/api/column')
-        .then(res => res.data)
-        .catch(error => { throw error; });
+    return axios
+        .get('/api/column')
+        .then(res => res.data);
 }
 
 function render(column, inElem) {

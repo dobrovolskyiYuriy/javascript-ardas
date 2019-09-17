@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  background-color: #fff;
+  min-height: 70px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.card:hover .card-icon {
+  display: block;
+}
+
+.card:hover .card-title {
+  box-shadow: 1.5px 1.5px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-icons {
+  width: 30px;
+}
+
+.card-icon {
+  display: none;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.card-title {
+  width: 100%;
+  border-radius: 5px;
+  margin-right: 2px;
+  padding: 5px;
+  word-wrap: break-word;
+  font-weight: bold;
+}

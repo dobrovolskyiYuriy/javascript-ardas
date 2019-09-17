@@ -1,4 +1,4 @@
-import Card from '../card';
+import Card from './card';
 
 export function onRemoveCard(event) {
   const targetCard = event.target.closest('.card');

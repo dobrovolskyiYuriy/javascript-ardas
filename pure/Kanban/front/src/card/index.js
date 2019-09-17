@@ -1,2 +1,2 @@
-import './card.css';
+// import './card.css';
 export { default } from './card';

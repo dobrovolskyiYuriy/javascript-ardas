@@ -9,7 +9,6 @@ import {
 } from './cardEvents';
 import {
     isNumeric,
-    isString,
     isHTMLElement,
     isCard,
     isObject
@@ -25,24 +24,13 @@ function remove(cardId) {
     axios.delete(`/api/card/${cardId}`);
 }
 
-function add(columnId, title = 'New Card') {
-    return axios({
-        method: 'post',
-        url: '/api/card',
-        data: {
-            title,
-            columnId
-        }
-    })
+function add(card) {
+    return axios.post('/api/card', card)
         .then(res => res.data);
 }
 
 function update(cardId, data) {
-    return axios({
-        method: 'patch',
-        url: `/api/card/${cardId}`,
-        data
-    })
+    return axios.patch(`/api/card/${cardId}`, data);
 }
 
 function render(card, inElem) {
@@ -62,7 +50,7 @@ function render(card, inElem) {
     const imgRemoveCard = document.createElement('img');
     imgRemoveCard.className = 'remove-card';
     imgRemoveCard.src = 'img/removeCard.png';
-    imgRemoveCard.addEventListener('click', onRemoveCard);
+    imgRemoveCard.addEventListener('click', event => onRemoveCard(event));
     imgRemoveCard.addEventListener('mouseover', onMouseOverRemove);
     imgRemoveCard.addEventListener('mouseout', onMouseOutRemove);
     imgRemoveCard.addEventListener('dragstart', event => event.stopPropagation());
@@ -74,7 +62,7 @@ function render(card, inElem) {
 }
 
 remove = typeDecorator(remove, isNumeric);
-add = typeDecorator(add, isNumeric, isString);
+add = typeDecorator(add, isObject);
 render = typeDecorator(render, isCard, isHTMLElement);
 update = typeDecorator(update, isNumeric, isObject);
 

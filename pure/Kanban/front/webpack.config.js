@@ -1,21 +1,19 @@
 module.exports = {
-    mode: 'development',
-    devtool: '(none)',
-    entry: './src/index.js',
-    output: {
-        filename: './public/boundle.js'
-    },
-    devServer: {
-        proxy: {
-            '/api': 'http://localhost:8089'
+  mode: "development",
+  // devtool: "(none)",
+  entry: './src',
+  output: {
+    filename: "app.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader"
         }
-    },
-    module: {
-        rules: [
-          {
-            test: /\.css$/,
-            loaders: ["style-loader", "css-loader"]
-          }
-        ]
-    }    
+      }
+    ]
+  }
 };
